@@ -20,7 +20,7 @@ public class FeeCalculator {
 		
 		int discountPercentage = switch (seniority) {
 			case 0 -> 0;
-			case 1,2,3 -> 3;  
+			case 1,2,3 -> 3; //TODO add 4
 			case 5,6,7,8,9 -> 5;
 			case 10 -> 8;
 			default ->8;		
