@@ -108,7 +108,7 @@ public class RentAgreementsWindow extends JFrame {
 			System.exit(ERROR);
 		}
 
-		monitorThread = new RentAgreementMonitor(); 
+		monitorThread = new RentAgreementMonitor();
 		new Thread(monitorThread).start();
 	}
 
