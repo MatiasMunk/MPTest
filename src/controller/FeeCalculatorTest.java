@@ -2,6 +2,8 @@ package controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,7 +20,8 @@ import org.junit.jupiter.api.Test;
  */
 
 class FeeCalculatorTest {
-
+	
+	//calcFee() tests
 	@Test
 	void testCalcFee_case1() {
 		//Arrange
@@ -136,5 +139,81 @@ class FeeCalculatorTest {
 	    
 	    //Act + Assert
 	    assertEquals(80, calc.calcFee(100, 0, true), 0.001);
+	}
+	
+	//calcSeniority() tests
+	@Test
+	void testCalcSeniority_case1() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		LocalDate employmentDate = LocalDate.parse("2025-09-16");
+		LocalDate todayDate = LocalDate.parse("2025-09-15");
+		
+		//Act + Assert
+	    assertThrows(IllegalArgumentException.class,
+	        () -> calc.calcSeniority(employmentDate, todayDate));
+		
+	}
+	
+	@Test
+	void testCalcSeniority_case2() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		LocalDate employmentDate = LocalDate.parse("2025-09-15");
+		LocalDate todayDate = LocalDate.parse("2025-09-15");
+		
+		//Act + Assert
+		assertEquals(0, calc.calcSeniority(employmentDate, todayDate), 0.001);
+		
+	}
+	
+	@Test
+	void testCalcSeniority_case3() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		LocalDate employmentDate = LocalDate.parse("2025-09-14");
+		LocalDate todayDate = LocalDate.parse("2025-09-15");
+		
+		//Act + Assert
+		assertEquals(0, calc.calcSeniority(employmentDate, todayDate), 0.001);
+	}
+	
+	@Test
+	void testCalcSeniority_case4() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		LocalDate employmentDate = LocalDate.parse("2024-09-16");
+		LocalDate todayDate = LocalDate.parse("2025-09-15");
+		
+		//Act + Assert
+		assertEquals(0, calc.calcSeniority(employmentDate, todayDate), 0.001);
+	}
+	
+	@Test
+	void testCalcSeniority_case5() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		LocalDate employmentDate = LocalDate.parse("2024-09-15");
+		LocalDate todayDate = LocalDate.parse("2025-09-15");
+		
+		//Act + Assert
+		assertEquals(1, calc.calcSeniority(employmentDate, todayDate), 0.001);
+	}
+	
+	@Test
+	void testCalcSeniority_case6() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		LocalDate employmentDate = LocalDate.parse("2024-09-14");
+		LocalDate todayDate = LocalDate.parse("2025-09-15");
+		
+		//Act + Assert
+		assertEquals(1, calc.calcSeniority(employmentDate, todayDate), 0.001);
 	}
 }
