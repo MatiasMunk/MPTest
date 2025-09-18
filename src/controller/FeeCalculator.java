@@ -20,7 +20,7 @@ public class FeeCalculator {
 		
 		int discountPercentage = switch (seniority) {
 			case 0 -> 0;
-			case 1,2,3 -> 3;  
+			case 1,2,3,4 -> 3;  
 			case 5,6,7,8,9 -> 5;
 			case 10 -> 8;
 			default ->8;		
@@ -42,7 +42,7 @@ public class FeeCalculator {
 		if (employmentDate.getYear()<MIN_YEAR || todayDate.getYear()<MIN_YEAR) {
 			throw new IllegalArgumentException(EXCEP_MESSAGE_DATE_TOO_OLD);			
 		}
-		if (employmentDate.compareTo(todayDate) >= 0) {
+		if (employmentDate.compareTo(todayDate) > 0) {
 			throw new IllegalArgumentException(EXCEP_MESSAGE_DATE_EMPL_BEFORE);			
 		}
 		Period period = employmentDate.until(todayDate);
@@ -53,16 +53,20 @@ public class FeeCalculator {
 	public boolean calcGreen(List<Vehicle> vv) {
 		
 		if (vv == null) throw new IllegalArgumentException("Vehicle list must not be null.");		
+		if (vv.isEmpty()) throw new IllegalArgumentException("Vehicle list must not be empty");
 		
 		boolean green = false;
 		if (!vv.isEmpty()) {
-			green = true;
+
 			for(Vehicle v : vv) {
 				if (v != null ) {
-				  green =  green || v.isElectric();
+				  green = v.isElectric();
 				} else {
 					throw new IllegalArgumentException();
 				}
+				
+				if(green == false)
+					break;
 			}
 		}
 		return green;

@@ -46,7 +46,7 @@ public class RentalAgreementDB implements RentalAgreementDAO {
 			}
 			
 			insert.setDate(1, Date.valueOf(a.getStartDate()));
-			insert.setDate(2, Date.valueOf(a.getStartDate())); 
+			insert.setDate(2, Date.valueOf(a.getEndDate())); 
 			insert.setDouble(3, a.getMonthlyFee());
 			insert.setInt(4, a.getEmployee().getId());
 			insert.setInt(5, a.getParkingSpot().getId());

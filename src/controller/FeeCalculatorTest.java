@@ -3,8 +3,12 @@ package controller;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import model.Vehicle;
 
 /**
  * Unit test class for the FeeCalculator methods as part of Exercise 3: Design of Unit Tests.
@@ -215,5 +219,145 @@ class FeeCalculatorTest {
 		
 		//Act + Assert
 		assertEquals(1, calc.calcSeniority(employmentDate, todayDate), 0.001);
+	}
+	
+	//calcGreen tests
+	@Test
+	void testCalcGreen_case1() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle g = new Vehicle(1, "", true, LocalDate.now());
+		vv.add(g);
+		
+		Vehicle n = new Vehicle(1, "", false, LocalDate.now());;
+		vv.add(n);
+		
+		Vehicle n2 = new Vehicle(1, "", false, LocalDate.now());;
+		vv.add(n2);
+		
+		//Act + Assert
+		assertFalse(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case2() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle g = new Vehicle(1, "", true, LocalDate.now());
+		vv.add(g);
+		
+		Vehicle n = new Vehicle(1, "", true, LocalDate.now());;
+		vv.add(n);
+		
+		Vehicle n2 = new Vehicle(1, "", false, LocalDate.now());;
+		vv.add(n2);
+		
+		//Act + Assert
+		assertFalse(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case3() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle g = new Vehicle(1, "", true, LocalDate.now());
+		vv.add(g);
+		
+		Vehicle n = new Vehicle(1, "", true, LocalDate.now());;
+		vv.add(n);
+		
+		Vehicle n2 = new Vehicle(1, "", true, LocalDate.now());;
+		vv.add(n2);
+		
+		//Act + Assert
+		assertTrue(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case4() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle g = new Vehicle(1, "", true, LocalDate.now());
+		vv.add(g);
+		
+		Vehicle n = new Vehicle(1, "", false, LocalDate.now());;
+		vv.add(n);
+		
+		//Act + Assert
+		assertFalse(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case5() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle g = new Vehicle(1, "", true, LocalDate.now());
+		vv.add(g);
+		
+		Vehicle g2 = new Vehicle(1, "", true, LocalDate.now());;
+		vv.add(g2);
+		
+		//Act + Assert
+		assertTrue(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case6() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle g = new Vehicle(1, "", true, LocalDate.now());
+		vv.add(g);
+		
+		//Act + Assert
+		assertTrue(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case7() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		Vehicle n = new Vehicle(1, "", false, LocalDate.now());
+		vv.add(n);
+		
+		//Act + Assert
+		assertFalse(calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case8() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = null;
+		
+		//Act + Assert
+		assertThrows(IllegalArgumentException.class,
+		() -> calc.calcGreen(vv));
+	}
+	
+	@Test
+	void testCalcGreen_case9() {
+		//Arrange
+		FeeCalculator calc = new FeeCalculator();
+		
+		List<Vehicle> vv = new ArrayList<>();
+		
+		//Act + Assert
+		assertThrows(IllegalArgumentException.class,
+		() -> calc.calcGreen(vv));
 	}
 }

@@ -16,8 +16,8 @@ public class ParkingSpotDB implements ParkingSpotDAO {
 	private static final String SELECT_BY_AVAILABILITY = SELECT_ALL + " where not exists (" 
 			+ " select 1 from rentagreement"
 			+ " where parkingspot.id = rentagreement.parkingspot_id" 
-			+ " and enddate > ?"// fromdate
-			+ " and rentagreement.startdate < ?)";// todate
+			+ " and enddate >= ?"// fromdate
+			+ " and rentagreement.startdate <= ?)";// todate
 	
 	private static final String SELECT_BY_ID = SELECT_ALL + " where id = ?";
 	private PreparedStatement selectByAvailability;
